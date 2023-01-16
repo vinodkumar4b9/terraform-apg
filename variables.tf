@@ -93,12 +93,36 @@ variable "instance_keypair" {
   default = "terraform-key"
 }
 
-# AWS EC2 Private Instance Count
-variable "private_instance_count" {
-  description = "AWS EC2 Private Instances Count"
+# variable "private_instance_count" {
+#   description = "AWS EC2 Private Instances Count"
+#   type = number
+#   default = 1  
+# }
+variable "desired_capacity" {
+  description = "EC2 Instance Type"
   type = number
-  default = 1  
+  default = 2
 }
+
+variable "min_size" {
+  description = "EC2 Instance Type"
+  type = number
+  default = 2
+}
+
+variable "max_size" {
+  description = "EC2 Instance Type"
+  type = number
+  default = 10 
+}
+
+variable "email" {
+  description = "EC2 Instance Type"
+  type = string
+  default = "example@example.com"
+}
+
+
 
 
 

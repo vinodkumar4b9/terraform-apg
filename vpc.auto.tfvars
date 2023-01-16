@@ -12,4 +12,8 @@ vpc_single_nat_gateway = true
 # EC2 Instance Variables
 instance_type = "t3.micro"
 instance_keypair = "terraform-key"
-private_instance_count = 2
+#private_instance_count = 2
+desired_capacity = 4
+min_size = 2
+max_size = 10
+email = "vinodkumar4b9@gmail.com"

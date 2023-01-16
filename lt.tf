@@ -7,7 +7,7 @@ resource "aws_launch_template" "my_launch_template" {
 
   vpc_security_group_ids = [ module.private_sg.this_security_group_id ]
   key_name = var.instance_keypair
-  user_data = filebase64("app-install.sh")
+  user_data = filebase64("app/app-install.sh")
   ebs_optimized = true 
   #default_version = 1
   update_default_version = true 

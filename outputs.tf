@@ -24,52 +24,20 @@ output "public_subnets" {
   value       = module.vpc.public_subnets
 }
 
-# VPC NAT gateway Public IP
-output "nat_public_ips" {
-  description = "List of public Elastic IPs created for AWS NAT Gateway"
-  value       = module.vpc.nat_public_ips
-}
-
-# VPC AZs
-output "azs" {
-  description = "A list of availability zones spefified as argument to this module"
-  value       = module.vpc.azs
-}
-
 # AWS EC2 Security Group Terraform Outputs
-
 # Public Bastion Host Security Group Outputs
-## public_bastion_sg_group_id
+
 output "public_bastion_sg_group_id" {
   description = "The ID of the security group"
   value       = module.public_bastion_sg.this_security_group_id
 }
 
-## public_bastion_sg_group_vpc_id
-output "public_bastion_sg_group_vpc_id" {
-  description = "The VPC ID"
-  value       = module.public_bastion_sg.this_security_group_vpc_id
-}
-
-## public_bastion_sg_group_name
-output "public_bastion_sg_group_name" {
-  description = "The name of the security group"
-  value       = module.public_bastion_sg.this_security_group_name
-}
 
 # Private EC2 Instances Security Group Outputs
-
 output "private_sg_group_id" {
   description = "The ID of the security group"
   #value       = module.private_sg.this_security_group_id
   value       = module.private_sg.this_security_group_id
-}
-
-## private_sg_group_vpc_id
-output "private_sg_group_vpc_id" {
-  description = "The VPC ID"
-  value       = module.private_sg.this_security_group_vpc_id
-  
 }
 
 # AWS EC2 Instance Terraform Outputs
@@ -79,12 +47,6 @@ output "private_sg_group_vpc_id" {
 output "ec2_bastion_public_instance_ids" {
   description = "List of IDs of instances"
   value       = module.ec2_public.id
-}
-
-## ec2_bastion_public_ip
-output "ec2_bastion_public_ip" {
-  description = "List of public IP addresses assigned to the instances"
-  value       = module.ec2_public.public_ip 
 }
 
 # Launch Template Outputs
@@ -106,14 +68,25 @@ output "autoscaling_group_id" {
   value = aws_autoscaling_group.my_asg.id 
 }
 
-## autoscaling_group_name
-output "autoscaling_group_name" {
-  description = "Autoscaling Group Name"
-  value = aws_autoscaling_group.my_asg.name 
+# load balancer outputs
+
+output "this_lb_arn_suffix" {
+  description = "ARN suffix of our load balancer - can be used with CloudWatch."
+  value       = module.alb.this_lb_arn_suffix
 }
-## autoscaling_group_arn
-output "autoscaling_group_arn" {
-  description = "Autoscaling Group ARN"
-  value = aws_autoscaling_group.my_asg.arn 
+
+output "target_group_arns" {
+  description = "ARNs of the target groups. Useful for passing to your Auto Scaling group."
+  value       = module.alb.target_group_arns
+}
+
+output "target_group_arn_suffixes" {
+  description = "ARN suffixes of our target groups - can be used with CloudWatch."
+  value       = module.alb.target_group_arn_suffixes
+}
+
+output "target_group_names" {
+  description = "Name of the target group. Useful for passing to your CodeDeploy Deployment Group."
+  value       = module.alb.target_group_names
 }
 
